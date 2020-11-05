@@ -1,3 +1,22 @@
+/**
+ * ----------------------------------------------------------------------------
+ *
+ * @DataStructure
+ *      Stack
+ * @Task
+ *      Implement infix to postfix conversion for basic arithmetic operations
+ *      Standard Operator Precedence applicable for JS to be considered
+ *      Display Appropriate Error Messages if the user input is incorrect
+ *      Follow Coding Stardards
+ */
+
+/**
+ * ----------------------------------------------------------------------------
+ *
+ * @Class Stack
+ * @Methods
+ *    length, push, pop, peek, traveerse
+ */
 class Stack {
   constructor() {
     this.elements = [];
@@ -29,6 +48,17 @@ class Stack {
     return stack;
   };
 }
+
+/**
+ * ----------------------------------------------------------------------------
+ *
+ * @Class getPostfix
+ * @Steps
+ *    1. Evaluate Operand
+ *    2. Evaluate enclosing braces (if any)
+ *    3. Evaluate Operators
+ *    4. Handle Exceptions
+ */
 
 let getPostfix = infix => {
   const paranth = { openBrace: "(", closedBrace: ")" };
@@ -115,62 +145,24 @@ let getPostfix = infix => {
   return postfix;
 };
 
-// console.log(getPostfix("(2+((3*5*9)/6)-4)"));
-// console.log(getPostfix("2+5*9/6-4)"));
-// console.log(getPostfix("2/2+1*2/2)"));
-// console.log(getPostfix("(2+(3*5*9/6-4)"));
-// console.log(getPostfix("(122+(23))"));
-// console.log(getPostfix("(A+(B)/c*D)"));
-// console.log(getPostfix("(A   +(B)/c*D)"));
-// console.log(getPostfix("1**********2"));
-// console.log(getPostfix("++++++++++"));
-// console.log(getPostfix("+/-=pieqweleknlf"));
-// console.log(getPostfix("(18/3)^2+((13+7)*5^2)"));
-// console.log(getPostfix("2*20/2+(3+4)*3^2-6+15"));
-// console.log(getPostfix("(5.9-5.3)*7.2+1.4^2"));
-// console.log(getPostfix("2**2*4&3|2"));
+/* -------------------------------------------------------------------------- */
 
-/*
-let postfix = infix => {
-  const reOpn = /[a-z]|[A-Z]|[0-9]/;
-  const opr = {
-    "+": 1,
-    "-": 1,
-    "*": 2,
-    "/": 3,
-    "%": 4,
-    "^": 5
-  };
+var exp1 = "(2+((3*5*9)/6)-4)";
+var exp2 = "(2+((3*5*9)/6)-4)";
+var exp3 = "2+5*9/6-4)";
+var exp4 = "2/2+1*2/2)";
+var exp5 = "(2+(3*5*9/6-4)";
+var exp6 = "(122+(23))";
+var exp7 = "(A+(B)/c*D)";
+var exp8 = "(A   +(B)/c*D)";
+var exp9 = "1**********2";
+var exp10 = "++++++++++";
+var exp11 = "+/-=pieqweleknlf";
+var exp12 = "(18/3)^2+((13+7)*5^2)";
+var exp13 = "2*20/2+(3+4)*3^2-6+15";
+var exp14 = "(5.9-5.3)*7.2+1.4^2";
+var exp15 = "2**2*4&3|2";
 
-  let stack = new Stack();
-  let outfix = "";
-  let op = "";
+var outString = getPostfix(exp2);
 
-  for (var i = 0; i < infix.length; i++) {
-    let chr = infix[i];
-    let oprIndex = Object.keys(opr).indexOf(chr);
-    if (reOpn.test(chr)) {
-      outfix += "" + chr;
-    } else if (oprIndex !== -1) {
-      if (oprIndex > opr[stack.peek()]) {
-        stack.push(chr);
-      } else {
-        var stackEle = stack.pop();
-        if (stackEle !== "-1" && stackEle !== "(") outfix += stackEle;
-        stack.push(chr);
-      }
-    } else if (chr === "(") {
-      stack.push(chr);
-    } else if (chr === ")") {
-      while (1) {
-        var stackEle = stack.pop();
-        if (stackEle === "-1" || stackEle === "(") break;
-        if (stackEle === ")") continue;
-        else outfix += stackEle;
-      }
-    }
-  }
-
-  return outfix;
-};
-*/
+console.log(outString);
