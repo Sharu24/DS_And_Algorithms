@@ -28,4 +28,23 @@ Application of a Stack Data Structures
       1. When User wants to go back to the the last screen visited
       2. He/She just have to click the back button and last viewed page is served
 3. In all the above Examples A Stack Data Structure is used
-4.
+
+## Linked List
+
+-      CreateNode =>
+-          Create a New Node (newNode)
+-              if Linked List is Empty
+-                  head = newNode
+-                  tail = newNode
+-                  newNode.prev = null
+-                  newNode.next = null
+-              if you want to append new node as Head
+-                  head = newNode
+-                  newNode.prev = null
+-                  newNode.next = currentHead
+-                  currentHead.prev = newNode
+-              if you want to append new node as Tail
+-                  tail = newNode
+-                  newNode.prev = currentTail
+-                  newNode.next = null
+-                  currentTail.next = newNode
