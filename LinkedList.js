@@ -42,7 +42,7 @@ function Node(prev, value, next) {
 
 // Add to Head (Insert Head Node)
 LinkedList.prototype.addToHead = function(value) {
-  let newNode = new Node(null, value, this.head);
+  const newNode = new Node(null, value, this.head);
   if (this.head) this.head.prev = newNode;
   else this.tail = newNode;
   this.head = newNode;
@@ -50,7 +50,7 @@ LinkedList.prototype.addToHead = function(value) {
 
 // Add to Tail (Insert Tail Node)
 LinkedList.prototype.addToTail = function(value) {
-  let newNode = new Node(this.tail, value, null);
+  const newNode = new Node(this.tail, value, null);
   if (this.tail) this.tail.next = newNode;
   else this.head = newNode;
   this.tail = newNode;
@@ -59,14 +59,15 @@ LinkedList.prototype.addToTail = function(value) {
 // Delete element from head
 LinkedList.prototype.removeHead = function() {
   if (this.head) {
+    const value = this.head.value;
     if (this.head === this.tail) {
       this.head = null;
       this.tail = null;
-      return true;
+      return value;
     }
     this.head = this.head.next;
     this.head.prev = null;
-    return true;
+    return value;
   } else {
     return false;
   }
@@ -75,14 +76,15 @@ LinkedList.prototype.removeHead = function() {
 // Remove a tail from linked list
 LinkedList.prototype.removeTail = function() {
   if (this.tail) {
+    const value = this.head.value;
     if (this.head === this.tail) {
-      const value = this.head.value;
       this.head = null;
       this.tail = null;
       return value;
     }
     this.tail = this.tail.prev;
     this.tail.next = null;
+    return value;
   } else {
     return false;
   }
@@ -100,16 +102,133 @@ LinkedList.prototype.traverse = function() {
   return linkedStr;
 };
 
+// Add a Node in between
+LinkedList.prototype.addNode = function(value, after) {
+  if (!after || !this.head) return false;
+  let newNode = new Node(null, value, null);
+  let node = this.head;
+
+  while (1) {
+    if (node.value === after) {
+      break; // found
+    } else {
+      if (node === this.tail) return false; // not found
+      node = node.next;
+      continue;
+    }
+  }
+
+  node.next = newNode;
+  newNode.prev = node;
+
+  if (node === this.tail) {
+    this.tail = newNode;
+  } else {
+    var temp = node.next;
+    newNode.next = temp;
+    temp.prev = newNode;
+  }
+  return true;
+};
+
+// Remove a Node in between
+LinkedList.prototype.removeNode = function(value, option) {
+  if (!this.head || !value) return false;
+  let node = this.head;
+  while (1) {
+    if (node.value !== value) {
+      if (node !== this.tail) {
+        node = node.next;
+        continue;
+      } else {
+        return false;
+      }
+    } else {
+      break;
+    }
+  }
+  // if there is only one node
+  if (this.head === this.tail) {
+    this.head = null;
+    this.tail = null;
+    return true;
+  }
+  // delete option nodes linked after this node(including)
+  if (option || option === 0) {
+    let temp = node.prev;
+
+    if (option === 0) {
+      if (!temp) {
+        this.head = null;
+        this.tail = null;
+        return true;
+      }
+      this.tail = temp;
+      temp.next = null;
+      return true;
+    }
+    if (!Number(option) || option < 0) return false;
+    var count = Number(option);
+    while (count) {
+      if (node !== this.tail) {
+        node = node.next;
+        count--;
+      } else {
+        // Delete all trailer nodes
+        this.tail = temp;
+        temp.next = null;
+        return true;
+      }
+    }
+    // Delete nodes from the header
+    if (!temp) {
+      this.head = node;
+      node.prev = null;
+      return true;
+    }
+    // Delete nodes from somewhere between
+    temp.next = node;
+    node.prv = temp;
+    return true;
+  }
+  //if node is head, make the next element as head
+  if (node === this.head) {
+    let newHead = node.next;
+    this.head = newHead;
+    newHead.prev = null;
+    return true;
+  }
+  //if node is tail, make preevious element as tail
+  if (node === this.tail) {
+    let newTail = node.prev;
+    this.tail = newTail;
+    newTail.next = null;
+    return true;
+  }
+  //if node is in between, point previous node to next node
+  let pTemp = node.prev;
+  let nTemp = node.next;
+  pTemp.next = nTemp;
+  nTemp.prev = pTemp;
+  return true;
+};
+
 const ll = new LinkedList();
 ll.addToHead(11);
-// ll.addToTail(55);
-// ll.addToHead(22);
-// ll.addToTail(66);
-// ll.addToHead(33);
-// ll.addToTail(44);
+ll.addToTail(55);
+ll.addToHead(22);
+ll.addToTail(66);
+ll.addToHead(33);
+ll.addToTail(44);
 
 console.log(ll.traverse());
 console.log(ll.removeHead());
 console.log(ll.traverse());
 console.log(ll.removeTail());
+console.log(ll.traverse());
+
+ll.addToTail(100);
+ll.addToHead(110);
+ll.addToTail(120);
+
 console.log(ll.traverse());
