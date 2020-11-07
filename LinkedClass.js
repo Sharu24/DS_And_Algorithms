@@ -99,12 +99,14 @@ class LinkedList {
   }
 
   /**
-   * Remove a certain Node
+   * @desc
+   *     Remove a certain Node
    *
    * @rule
    *     if head node than make the next node as head
    *     if tail node than make the prev node as tail
    *     else prev node point to next node
+   *
    * @byValue
    *    If there are no options, Just delete the node
    *    - Handle when the node is a head / tail
@@ -169,16 +171,20 @@ class LinkedList {
         // if user wants to delete only few nodes
         let temp = node.prev;
         while (count-- && node.next) node = node.next;
-        if (!temp && !node.next) { // Remove everything from head
+        if (!temp && !node.next) {
+          // Remove everything from head
           this.head = null;
           this.tail = null;
-        } else if (!node.next) { // from n'th node until tail
+        } else if (!node.next) {
+          // from n'th node until tail
           this.tail = temp;
           temp.next = null;
-        } else if (!temp) {     // from head until a m'th node
+        } else if (!temp) {
+          // from head until a m'th node
           this.head = node;
           node.prev = null;
-        } else {                // from a n'th node until m'th node
+        } else {
+          // from a n'th node until m'th node
           temp.next = node;
           node.prev = temp;
         }
