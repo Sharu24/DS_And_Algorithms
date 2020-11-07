@@ -101,18 +101,24 @@ class LinkedList {
   /**
    * Remove a certain Node
    *
-   * If there are no options, Just delete the node
-   * - Handle when the node is a head / tail
-   * - Handle when the value/node is not found
+   * @rule
+   *     if head node than make the next node as head
+   *     if tail node than make the prev node as tail
+   *     else prev node point to next node
+   * @byValue
+   *    If there are no options, Just delete the node
+   *    - Handle when the node is a head / tail
+   *    - Handle when the value/node is not found
    *
-   * if there are options
-   * - Option = -1
-   *    * Delete all the nodes after the searched node
-   * - Option = 0
-   *    * Just return the delete, dont delete it
-   * - Option = Natural Number (1,2,3...n)
-   *    * Delete the number of elements after searched node
-   *    * Deletes Searched node as well
+   * @byOptions
+   *    if there are options
+   *    - Option = -1
+   *        * Delete all the nodes after the searched node
+   *    - Option = 0
+   *        * Just return the delete, dont delete it
+   *    - Option = Natural Number (1,2,3...n)
+   *        * Delete the number of elements after searched node
+   *        * Deletes Searched node as well
    */
   removeNode(value, options) {
     if (!this.head || !value) return false;
@@ -122,11 +128,13 @@ class LinkedList {
       else node = node.next;
     }
     if (node.value !== value) return false;
-    // if head node than make the next node as head
-    // if tail node than make the prev node as tail
-    // else prev node point to next node
-    let count = Number(options);
-    if (!count) {
+
+    if (options === undefined) {
+      // If its a header Node
+      // - handle when its a single node LL
+      // - when there are multiple nodes
+      // If its a Trailer Node
+      // If its somewhere in between
       if (!node.prev) {
         if (!node.next) {
           this.head = null;
@@ -143,6 +151,8 @@ class LinkedList {
         node.next.prev = node.prev;
       }
     } else {
+      let count = Number(options);
+      if (isNaN(count)) return false;
       // if user wants to delete everything (including value node)
       if (count === -1) {
         // if head node make the list empty
@@ -153,20 +163,22 @@ class LinkedList {
           this.tail = node.prev;
           node.prev.next = null;
         }
+      } else if (count === 0) {
+        return node.value;
       } else {
         // if user wants to delete only few nodes
         let temp = node.prev;
         while (count-- && node.next) node = node.next;
-        if (!temp && !node.next) {
+        if (!temp && !node.next) { // Remove everything from head
           this.head = null;
           this.tail = null;
-        } else if (!node.next) {
+        } else if (!node.next) { // from n'th node until tail
           this.tail = temp;
           temp.next = null;
-        } else if (!temp) {
+        } else if (!temp) {     // from head until a m'th node
           this.head = node;
           node.prev = null;
-        } else {
+        } else {                // from a n'th node until m'th node
           temp.next = node;
           node.prev = temp;
         }
