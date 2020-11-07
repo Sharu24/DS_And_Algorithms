@@ -31,20 +31,20 @@ Application of a Stack Data Structures
 
 ## Linked List
 
--      CreateNode =>
--          Create a New Node (newNode)
--              if Linked List is Empty
--                  head = newNode
--                  tail = newNode
--                  newNode.prev = null
--                  newNode.next = null
--              if you want to append new node as Head
--                  head = newNode
--                  newNode.prev = null
--                  newNode.next = currentHead
--                  currentHead.prev = newNode
--              if you want to append new node as Tail
--                  tail = newNode
--                  newNode.prev = currentTail
--                  newNode.next = null
--                  currentTail.next = newNode
+      CreateNode =>
+          Create a New Node (newNode)
+              if Linked List is Empty
+                  head = newNode
+                  tail = newNode
+                  newNode.prev = null
+                  newNode.next = null
+              if you want to append new node as Head
+                  head = newNode
+                  newNode.prev = null
+                  newNode.next = currentHead
+                  currentHead.prev = newNode
+              if you want to append new node as Tail
+                  tail = newNode
+                  newNode.prev = currentTail
+                  newNode.next = null
+                  currentTail.next = newNode
