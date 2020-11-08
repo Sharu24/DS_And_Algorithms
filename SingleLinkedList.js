@@ -1,7 +1,12 @@
-// 1. Implement single linked list,perform add head and tail nodes,remove head and tail nodes operations.
-// 2. Implement circular linked list , perform add head and tail nodes, remove head and tail nodes operations.
-// 3. Implement Queue data structure using stacks.
-// 4. implement stack data structure using Queues.
+/**
+ * @DataStructurees
+ *      Singly Linked List
+ * @methods
+ *      addHeead()
+ *      addTail()
+ *      removeHeaed()
+ *      removeTail()
+ */
 
 class LinkedList {
   constructor() {
@@ -10,11 +15,9 @@ class LinkedList {
   }
 
   addHead(value) {
-    // if Empty List,
-    //    set head and tail to self
-    // else
-    //    Point to new node to current head
-    //    Make the new node as the new head
+    // if Empty List, set head and tail to self
+    // Make the new Node point to current head
+    // Make the new node as the new head node
     let newNode = new Node(value, this.head);
     if (!this.head) this.tail = newNode;
     this.head = newNode;
@@ -22,6 +25,8 @@ class LinkedList {
   }
 
   addTail(value) {
+    // if its a empty list,set the head and tail to self
+    // Point the current tail to new Node
     let newNode = new Node(value, null);
     if (!this.tail) this.head = newNode;
     else this.tail.next = newNode;
@@ -30,6 +35,7 @@ class LinkedList {
   }
 
   removeHead() {
+    // Set the next node as the new Head
     if (!this.head) return false;
     if (!this.head.next) {
       this.head = null;
@@ -41,6 +47,8 @@ class LinkedList {
   }
 
   removeTail() {
+    // Traverse to the tail node
+    // Set the previous node as the tail node
     if (!this.tail) return false;
     if (!this.head.next) {
       this.head = null;

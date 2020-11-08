@@ -1,5 +1,11 @@
 /**
  * Implement a Queue (Enqueue, Deequeue) with Stacks
+ *
+ * @methods
+ *      enQueue()
+ *      deQueue()
+ *      rear()
+ *      front()
  */
 
 class Stack {
@@ -11,6 +17,7 @@ class Stack {
   isEmpty = () => (this.items.length ? false : true);
   pop = () => (this.isEmpty() ? false : this.items.pop());
   peek = () => (this.isEmpty() ? false : this.items[this.items.length - 1]);
+  first = () => (this.isEmpty() ? false : this.items[0]);
 }
 
 class Queue {
@@ -20,14 +27,24 @@ class Queue {
   }
 
   enQueue(item) {
+    // Push all the elements from s1 to s2
+    // Push the new element on top
+    // Pop all the elements from s2 and push to s1
     while (!this.s1.isEmpty()) this.s2.push(this.s1.pop());
     this.s1.push(item);
     while (!this.s2.isEmpty()) this.s1.push(this.s2.pop());
   }
 
   deQueue() {
-    if (!this.s1.isEmpty()) return this.s1.pop();
-    else return false;
+    return this.s1.pop();
+  }
+
+  front() {
+    return this.s1.peek();
+  }
+
+  rear() {
+    return this.s1.first();
   }
 }
 

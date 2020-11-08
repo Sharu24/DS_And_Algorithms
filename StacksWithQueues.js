@@ -1,5 +1,8 @@
 /**
  * Implement Stacks using Queues
+ *
+ * @Approach
+ *      Create two Queues to swap elements to fulfil stack methods
  */
 
 class Queue {
@@ -22,6 +25,10 @@ class Stack {
   }
 
   push(item) {
+    // If the Queue is empty use enQueue
+    // Else enQueue the new Element into Q2
+    //      deQueue and enQueue Q1 innto Q2
+    //      Copy Q2 into Q1 and clean Q2
     if (this.q1.isEmpty()) {
       this.q1.enQueue(item);
     } else {
@@ -35,11 +42,13 @@ class Stack {
   }
 
   pop() {
+    // pop is equivalent to deQueue
     if (this.q1.isEmpty()) return false;
     else return this.q1.deQueue();
   }
 
   peek() {
+    // peek is the front element of a Queue
     if (this.q1.isEmpty()) return false;
     else return this.q1.front();
   }
